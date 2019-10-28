@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="article-entry">
+<p> {{ object.event_body }} at {{ object.event_time }} </p>
+<p></p>
+</div>
+<p><a href="{% url 'events_edit' object.pk %}">Edit</a> |
+<a href="{% url 'events_delete' object.pk %}">Delete</a></p>
+<p>Back to <a href="{% url 'planners_list' %}">all plans</a>.</p>
+{% endblock content %}

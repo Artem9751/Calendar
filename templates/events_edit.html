@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<p><p>Change this event here or <a href="{% url 'events_delete' object.pk %}">cancel it</a></p></p>
+<form action="" method="post">{% csrf_token %}
+{{ form.as_p }}
+<button class="btn btn-info ml-2" type="submit">Update</button>
+</form>
+{% endblock content %}

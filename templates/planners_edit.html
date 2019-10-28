@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Change date for this plans/
+    <a href="{% url 'planners_delete' object.pk %}">Сancel plans for this day/</a>
+    <a href="{% url 'events_new' %}">+ New event</a></p>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-info ml-2" type="submit">Update</button>
+</form>
+{% endblock content %}

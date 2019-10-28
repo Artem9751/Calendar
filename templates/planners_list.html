@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Plans{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+ {% for plans in plans_list %}
+ {% if username.username == plans.author.username %}
+   <div class="card-header">
+    <a href="{% url 'planners_edit' plans.pk %}">{{ plans.date }}</a>
+   </div>
+   <div class="card-body">
+    {% for event in events_of_day %}
+     {% if plans.id == event.event_planner_id %}
+      {{ event.event_body }} at {{ event.event_time }} <a href="{% url 'events_edit' event.pk %}">-></a><br>
+     {% endif %}
+    {% endfor %}
+    </div>
+    <br />
+{% endif %}
+ {% endfor %}
+{% endif %}
+{% endblock content %}
