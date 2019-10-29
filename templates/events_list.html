@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Events{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+   <div class="row">
+       {% for date in dates %}
+       <div class="col-2">
+       {{date}}
+       {% for event in events %}
+     {% if event.date == date %}
+           <div class="col-2">{{ event.body }}</div>
+     {% endif %}
+    {% endfor %}
+           </div>
+    {% endfor %}
+    </div>
+    <br />
+{% endif %}
+{% endblock content %}

@@ -4,7 +4,6 @@ from django.views.generic import ListView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-import datetime
 
 from .forms import PlannerCreateForm
 from .models import Planner, Event
@@ -95,7 +94,7 @@ class EventsDeleteView(LoginRequiredMixin, DeleteView):
 class EventsCreateView(LoginRequiredMixin, CreateView):
     model = Event
     template_name = 'events_new.html'
-    fields = ('event_body', 'event_time', 'event_alert_time', 'event_planner',)
+    fields = ('event_body', 'event_time', 'event_alert_time')
     success_url = reverse_lazy('planners_list')
     login_url = 'login'
 
