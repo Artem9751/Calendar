@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+  {{error}}
+<a href="{% url 'planners_edit' current_day.id %}">go in it.</a>
+{% endblock content %}

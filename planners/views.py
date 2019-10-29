@@ -3,8 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
-from users.models import CustomUser
+from django.http import HttpResponseRedirect
+import datetime
 
+from .forms import PlannerCreateForm
 from .models import Planner, Event
 
 
@@ -16,7 +18,6 @@ class PlannersListView(LoginRequiredMixin, ListView):
     def get(self, request):
         plans_list = Planner.objects.all()
         events_of_day = Event.objects.all()
-        print(self.request)
         return render(request, self.template_name, {"plans_list": plans_list, "events_of_day": events_of_day, "username": request.user})
 
 
@@ -35,7 +36,7 @@ class PlannersDeleteView(LoginRequiredMixin, DeleteView):
     login_url = 'login'
 
 
-class PlannerCreateView(LoginRequiredMixin, CreateView):
+'''class PlannerCreateView(LoginRequiredMixin, CreateView):
     model = Planner
     template_name = 'planners_new.html'
     fields = ('date',)
@@ -43,11 +44,37 @@ class PlannerCreateView(LoginRequiredMixin, CreateView):
     login_url = 'login'
 
     def form_valid(self, form):
+        dates = set()
+        for a in self.model.objects.all():
+            dates.add(a.date)
+        print()
         form.instance.author = self.request.user
-        return super().form_valid(form)
+        return super().form_valid(form)'''
 
-    '''def post(self, requets):
-        return render(requets, self.template_name, {'author': self.request.user})'''
+
+class PlannerCreateView(CreateView):
+    model = Planner
+    form_class = PlannerCreateForm
+    template_name = 'planners_new.html'
+
+    def post(self, request):
+        newday = Planner()
+        newday.date = request.POST.get("date")
+        newday.author = request.user
+        days = set()
+        for day in Planner.objects.all():
+            days.add(str(day))
+        if str(newday.date) in days:
+            current_day = Planner.objects.get(date = newday.date)
+            error = "You already have plans for this day"
+            return render(request, "error.html", {"error": error, 'current_day': current_day})
+        else:
+            newday.save()
+            return HttpResponseRedirect('/planners/')
+
+    def get(self, request):
+        form_create = PlannerCreateForm()
+        return render(request, self.template_name, {'formcreate': form_create})
 
 
 class EventsUpdateView(LoginRequiredMixin, UpdateView):

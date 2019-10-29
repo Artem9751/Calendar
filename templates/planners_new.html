@@ -3,7 +3,7 @@
 {% block content %}
 <h1>New Day</h1>
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    {{ formcreate }}
     <button class="btn btn-success ml-2" type="submit">Save</button>
 </form>
 {% endblock content %}
