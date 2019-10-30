@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from .models import Event
 
-#from .tasks import mail
+from .tasks import mail
 
 
 class EventsListView(LoginRequiredMixin, ListView):
@@ -17,8 +17,9 @@ class EventsListView(LoginRequiredMixin, ListView):
         set_of_dates = set()
         for event in all_events:
             set_of_dates.add(event.date)
-            #if event.alert_time != None:
-             #   print(mail.delay(event.event_time))
+            if event.alert_time != None:
+                mail.delay(event.date, event.event_time, event.alert_time, event.body, request.user.email)
+
         return render(request, self.template_name, {'dates': set_of_dates, 'events': all_events})
 
 
