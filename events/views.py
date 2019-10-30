@@ -18,7 +18,7 @@ class EventsListView(LoginRequiredMixin, ListView):
         for event in all_events:
             set_of_dates.add(event.date)
             if event.alert_time != None:
-                mail.delay(event.date, event.event_time, event.alert_time, event.body, request.user.email)
+                mail.delay()
 
         return render(request, self.template_name, {'dates': set_of_dates, 'events': all_events})
 
