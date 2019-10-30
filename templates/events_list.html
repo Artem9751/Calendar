@@ -9,7 +9,10 @@
        {{date}}
        {% for event in events %}
      {% if event.date == date %}
-           <div class="col-2">{{ event.body }}</div>
+           <div class="col-12">
+               {{ event.body }} {{ event.event_time }}
+               <a href="{% url 'events_edit' event.pk %}">e</a>/<a href="{% url 'events_delete' event.pk %}">d</a>
+           </div>
      {% endif %}
     {% endfor %}
            </div>

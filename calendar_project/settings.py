@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Minsk'
 
 USE_I18N = True
 
@@ -128,8 +128,15 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_HOST = 'smtp.gmail.com'
+
 EMAIL_USE_TLS = True
+
 EMAIL_PORT = 587
+
 EMAIL_HOST_USER = 'artemiybrilon@gmail.com'
+
 EMAIL_HOST_PASSWORD = 'Klani123m12m103'
+
+CELERY_BROKER_URL = 'amqp://localhost'

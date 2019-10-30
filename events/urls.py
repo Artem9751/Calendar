@@ -3,11 +3,12 @@ from .views import (
     EventsUpdateView,
     EventsDeleteView,
     EventsCreateView,
-    EventsListView)
+    EventsListView,
+)
 
 urlpatterns = [
     path('<int:pk>/edit/', EventsUpdateView.as_view(), name='events_edit'),
     path('<int:pk>/delete/', EventsDeleteView.as_view(), name='events_delete'),
     path('new/', EventsCreateView.as_view(), name='events_new'),
-    path('', EventsListView.as_view(), name='planners_list'),
+    path('', EventsListView.as_view(), name='events_list'),
 ]

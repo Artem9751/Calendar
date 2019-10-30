@@ -23,5 +23,5 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')),
     path('events/', include('events.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('planners/error/', TemplateView.as_view(template_name='error.html'), name='error'),
+
 ]

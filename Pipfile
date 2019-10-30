@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 django = "==2.1"
+celery = "*"
+redis = "*"
+pika = "==0.9.5"
 
 [requires]
 python_version = "3.6"

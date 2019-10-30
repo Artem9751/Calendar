@@ -10,8 +10,11 @@ class Event(models.Model):
     alert_time = models.TimeField(null=True, blank=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
+    #def alert(self):
+        #return self.alert_time <= (self.event_time
+
     def __str__(self):
         return self.body
 
     def get_absolute_url(self):
-        return reverse('planners_detail', args=[str(self.id)])
+        return reverse('events_detail', args=[str(self.id)])
